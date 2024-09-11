@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://84nld8h07qm1"]
+
+[ext_resource type="Script" path="res://game_controller.gd" id="1_2jvkl"]
+[ext_resource type="Script" path="res://player.gd" id="1_ytm6r"]
+[ext_resource type="Texture2D" uid="uid://brpnd3ytjbwyo" path="res://images/ship.png" id="2_k04s5"]
+[ext_resource type="PackedScene" uid="uid://bjhrplgxor2jj" path="res://enemy.tscn" id="3_q82ur"]
+[ext_resource type="PackedScene" uid="uid://cntpwrcqr7ke4" path="res://bullet.tscn" id="4_nx7x2"]
+[ext_resource type="Script" path="res://enemySpawner.gd" id="5_mj6j3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvp8i"]
+size = Vector2(163, 198)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2jvkl")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(138, 515)
+script = ExtResource("1_ytm6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_uvp8i")
+
+[node name="playerSprite" type="Sprite2D" parent="Player"]
+position = Vector2(2.49999, 0.500005)
+scale = Vector2(0.313684, 0.321549)
+texture = ExtResource("2_k04s5")
+
+[node name="Enemy" parent="." instance=ExtResource("3_q82ur")]
+position = Vector2(-1, -189)
+
+[node name="Bullet" parent="." instance=ExtResource("4_nx7x2")]
+position = Vector2(-41, 483)
+
+[node name="enemySpawner" type="Node2D" parent="."]
+script = ExtResource("5_mj6j3")
+
+[node name="Timer" type="Timer" parent="enemySpawner"]
+wait_time = 2.0
+autostart = true
+
+[node name="scoreLabel" type="Label" parent="."]
+offset_left = 8.0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0
+"
+
+[connection signal="timeout" from="enemySpawner/Timer" to="enemySpawner" method="_on_timer_timeout"]
