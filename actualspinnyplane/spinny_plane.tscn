@@ -1,0 +1,135 @@
+[gd_scene load_steps=13 format=3 uid="uid://nhtvhf0efrsb"]
+
+[ext_resource type="Script" path="res://flappyController.gd" id="1_7qdoh"]
+[ext_resource type="Script" path="res://plane.gd" id="1_nvl1f"]
+[ext_resource type="Texture2D" uid="uid://fjrifth5k2ii" path="res://sprites/planeRed1.png" id="2_hmwkd"]
+[ext_resource type="Texture2D" uid="uid://c1h6cae0d5kfd" path="res://sprites/planeRed2.png" id="3_qu0aj"]
+[ext_resource type="Texture2D" uid="uid://thnwwqxspuwe" path="res://sprites/planeRed3.png" id="4_oo8jc"]
+[ext_resource type="AudioStream" uid="uid://d0lyae6siw568" path="res://Three Red Hearts - Sanctuary.ogg" id="6_u6mdt"]
+[ext_resource type="AudioStream" uid="uid://w5r27lkweln5" path="res://impactPlate_heavy_003.ogg" id="7_ck825"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhy0y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ey25v"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hmwkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qu0aj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oo8jc")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hmwkd")
+}],
+"loop": true,
+"name": &"glide",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_2mknr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -50)]
+}
+
+[sub_resource type="Animation" id="Animation_y6cjm"]
+resource_name = "slide in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(500, 300), Vector2(500, 350)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ploje"]
+_data = {
+"RESET": SubResource("Animation_2mknr"),
+"slide in": SubResource("Animation_y6cjm")
+}
+
+[node name="spinnyPlane" type="Node2D"]
+script = ExtResource("1_7qdoh")
+
+[node name="Plane" type="RigidBody2D" parent="."]
+position = Vector2(110, 314)
+script = ExtResource("1_nvl1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plane"]
+shape = SubResource("CircleShape2D_hhy0y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Plane"]
+sprite_frames = SubResource("SpriteFrames_ey25v")
+animation = &"glide"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="bgm" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("6_u6mdt")
+autoplay = true
+
+[node name="thud" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("7_ck825")
+
+[node name="GameOver" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = -10.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play Again?"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_ploje")
+}
+
+[connection signal="animation_finished" from="Plane/AnimatedSprite2D" to="Plane" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
