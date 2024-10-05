@@ -1,0 +1,3 @@
+Most of the sprites I made myself using online paint
+
+The crash.wav was ripped from KennysAssets, not sure where exactly after that, we were given it as an assignment resource file for infiniteRunner

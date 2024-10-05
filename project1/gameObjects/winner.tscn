@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciepxat51ohgo"]
+
+[ext_resource type="Texture2D" uid="uid://mi3kcku2e67" path="res://sprites/winnerBG.png" id="1_13e0v"]
+[ext_resource type="Script" path="res://scripts/btn_replay.gd" id="2_fxa5a"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1162.0
+offset_bottom = 639.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 647.0
+texture = ExtResource("1_13e0v")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 209.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0.667621, 0.325647, 0.0122909, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "WINNER!!!!"
+
+[node name="btnPlay" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 97.0
+offset_right = 250.0
+offset_bottom = 155.0
+text = "Go back to Menu!"
+script = ExtResource("2_fxa5a")
+
+[connection signal="pressed" from="Control/btnPlay" to="Control/btnPlay" method="_on_pressed"]

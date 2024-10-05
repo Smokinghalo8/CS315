@@ -1,0 +1,221 @@
+[gd_scene load_steps=13 format=3 uid="uid://caxo8m7j0ia3m"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_p5ad4"]
+[ext_resource type="Texture2D" uid="uid://btjut242nk2ci" path="res://sprites/leveltwoBG.png" id="2_kxxd6"]
+[ext_resource type="Texture2D" uid="uid://b1yx0nxgdkfdi" path="res://sprites/leveltwoFloor.png" id="3_e5gb1"]
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="4_2mnru"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="5_faf1n"]
+[ext_resource type="Script" path="res://scripts/Sus.gd" id="6_fu8ym"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="7_2ojy4"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="8_ly6pd"]
+[ext_resource type="AudioStream" uid="uid://82tqxwxry5di" path="res://sfx/crash.wav" id="9_4komw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlkvi"]
+size = Vector2(2223, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tditl"]
+radius = 59.0762
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3tyy"]
+radius = 47.0425
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 132.0
+script = ExtResource("1_p5ad4")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 138.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 19
+text = "EAT THEM ALL
+SPARE NO ONE"
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+layout_mode = 0
+offset_left = -33.0
+offset_top = -276.0
+offset_right = 2306.0
+offset_bottom = 1042.0
+texture = ExtResource("2_kxxd6")
+
+[node name="particle" type="Node2D" parent="."]
+
+[node name="boom" type="CPUParticles2D" parent="particle"]
+position = Vector2(-200, 153)
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 515.15
+angular_velocity_min = -203.64
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+
+[node name="tracer" type="CPUParticles2D" parent="particle"]
+emitting = false
+one_shot = true
+speed_scale = 0.5
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1091.5, 10.5)
+shape = SubResource("RectangleShape2D_wlkvi")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(1135.5, 18)
+scale = Vector2(3.40703, 0.1875)
+texture = ExtResource("3_e5gb1")
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(265, 258)
+gravity_scale = 0.0
+script = ExtResource("4_2mnru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+shape = SubResource("CircleShape2D_tditl")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_faf1n")
+
+[node name="Sus5" type="RigidBody2D" parent="."]
+position = Vector2(1516, 603)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus5"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus5"]
+texture = ExtResource("7_2ojy4")
+
+[node name="Sus6" type="RigidBody2D" parent="."]
+position = Vector2(1109, 596)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus6"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus6"]
+texture = ExtResource("7_2ojy4")
+
+[node name="Sus7" type="RigidBody2D" parent="."]
+position = Vector2(1899, 606)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus7"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus7"]
+texture = ExtResource("7_2ojy4")
+
+[node name="Sus8" type="RigidBody2D" parent="."]
+position = Vector2(1616, 61)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus8"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus8"]
+texture = ExtResource("7_2ojy4")
+
+[node name="Sus9" type="RigidBody2D" parent="."]
+position = Vector2(1219, 58)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus9"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus9"]
+texture = ExtResource("7_2ojy4")
+
+[node name="Sus10" type="RigidBody2D" parent="."]
+position = Vector2(2016, 61)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_fu8ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus10"]
+shape = SubResource("CircleShape2D_n3tyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus10"]
+texture = ExtResource("7_2ojy4")
+
+[node name="wallGroup" parent="." instance=ExtResource("8_ly6pd")]
+position = Vector2(1394, 615)
+
+[node name="Wall" parent="wallGroup" instance=ExtResource("8_ly6pd")]
+position = Vector2(227, -4)
+
+[node name="Wall2" parent="wallGroup" instance=ExtResource("8_ly6pd")]
+position = Vector2(226, -270)
+
+[node name="wallGroup3" parent="." instance=ExtResource("8_ly6pd")]
+position = Vector2(994, 615)
+
+[node name="Wall" parent="wallGroup3" instance=ExtResource("8_ly6pd")]
+position = Vector2(227, -4)
+
+[node name="Wall2" parent="wallGroup3" instance=ExtResource("8_ly6pd")]
+position = Vector2(226, -270)
+
+[node name="wallGroup2" parent="." instance=ExtResource("8_ly6pd")]
+position = Vector2(1794, 618)
+
+[node name="Wall" parent="wallGroup2" instance=ExtResource("8_ly6pd")]
+position = Vector2(227, -4)
+
+[node name="Wall2" parent="wallGroup2" instance=ExtResource("8_ly6pd")]
+position = Vector2(226, -270)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1126, 387)
+zoom = Vector2(0.5, 0.5)
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="crash" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("9_4komw")
+
+[connection signal="body_entered" from="Sus5" to="Sus5" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus5" to="Sus5" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus6" to="Sus6" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus6" to="Sus6" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus7" to="Sus7" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus7" to="Sus7" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus8" to="Sus8" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus8" to="Sus8" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus9" to="Sus9" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus9" to="Sus9" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus10" to="Sus10" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus10" to="Sus10" method="_on_body_shape_entered"]

@@ -1,0 +1,199 @@
+[gd_scene load_steps=14 format=3 uid="uid://dsv54oatgckjp"]
+
+[ext_resource type="Script" path="res://scripts/gameController.gd" id="1_smodi"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="2_xttid"]
+[ext_resource type="Texture2D" uid="uid://cc1t7ackgbpev" path="res://sprites/leveloneBG.png" id="3_8irqq"]
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="4_5vxhq"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="5_jvg3n"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="6_pr07k"]
+[ext_resource type="Texture2D" uid="uid://bxwr5nnoifapw" path="res://sprites/leveloneFloor.png" id="7_tih3o"]
+[ext_resource type="Script" path="res://scripts/Sus.gd" id="8_q5vay"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="9_pmmng"]
+[ext_resource type="AudioStream" uid="uid://82tqxwxry5di" path="res://sfx/crash.wav" id="10_phmlm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cox6n"]
+radius = 59.0762
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjj1"]
+size = Vector2(1182, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_280fk"]
+radius = 47.0425
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_smodi")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_xttid")
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 647.0
+texture = ExtResource("3_8irqq")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(272, 216)
+gravity_scale = 0.0
+script = ExtResource("4_5vxhq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+shape = SubResource("CircleShape2D_cox6n")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_jvg3n")
+
+[node name="particle" type="Node2D" parent="."]
+
+[node name="boom" type="CPUParticles2D" parent="particle"]
+position = Vector2(-200, 153)
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 515.15
+angular_velocity_min = -203.64
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+
+[node name="tracer" type="CPUParticles2D" parent="particle"]
+emitting = false
+one_shot = true
+speed_scale = 0.5
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+
+[node name="Wall" parent="." instance=ExtResource("6_pr07k")]
+position = Vector2(659, 610)
+
+[node name="Wall2" parent="." instance=ExtResource("6_pr07k")]
+position = Vector2(658, 344)
+
+[node name="Wall3" parent="." instance=ExtResource("6_pr07k")]
+position = Vector2(1042, 611)
+
+[node name="Wall4" parent="." instance=ExtResource("6_pr07k")]
+position = Vector2(1040, 347)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_0fjj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(576, 3.49998)
+scale = Vector2(1.74524, 0.132813)
+texture = ExtResource("7_tih3o")
+
+[node name="Sus" type="RigidBody2D" parent="."]
+position = Vector2(861, 515)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus"]
+texture = ExtResource("9_pmmng")
+
+[node name="Sus2" type="RigidBody2D" parent="."]
+position = Vector2(855, 305)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus2"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus2"]
+texture = ExtResource("9_pmmng")
+
+[node name="Sus3" type="RigidBody2D" parent="."]
+position = Vector2(104, 489)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus3"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus3"]
+texture = ExtResource("9_pmmng")
+
+[node name="Sus4" type="RigidBody2D" parent="."]
+position = Vector2(302, 529)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus4"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus4"]
+texture = ExtResource("9_pmmng")
+
+[node name="Sus5" type="RigidBody2D" parent="."]
+position = Vector2(470, 346)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus5"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus5"]
+texture = ExtResource("9_pmmng")
+
+[node name="Sus6" type="RigidBody2D" parent="."]
+position = Vector2(499, 574)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("8_q5vay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus6"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus6"]
+texture = ExtResource("9_pmmng")
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="crash" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("10_phmlm")
+
+[connection signal="body_entered" from="Sus" to="Sus" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus" to="Sus" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus2" to="Sus2" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus2" to="Sus2" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus3" to="Sus3" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus3" to="Sus3" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus4" to="Sus4" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus4" to="Sus4" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus5" to="Sus5" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus5" to="Sus5" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus6" to="Sus6" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus6" to="Sus6" method="_on_body_shape_entered"]

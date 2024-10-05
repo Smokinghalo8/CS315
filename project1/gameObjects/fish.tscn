@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://8jweha53ndsb"]
+
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="1_momdn"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="2_2bic4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ep1fb"]
+radius = 59.0762
+
+[node name="fish" type="RigidBody2D" groups=["Bird", "Player"]]
+script = ExtResource("1_momdn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ep1fb")
+
+[node name="FishTile080" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2bic4")

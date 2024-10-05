@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://coqgsovfl77if"]
+
+[ext_resource type="Script" path="res://slingshot.gd" id="1_s5cpv"]
+[ext_resource type="Texture2D" uid="uid://bphcnlk50jbxs" path="res://sprites/Auto_Racing_Black_Box.svg.png" id="2_er2qd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0f5r5"]
+radius = 114.215
+
+[node name="slingshot" type="Node2D"]
+script = ExtResource("1_s5cpv")
+
+[node name="AutoRacingBlackBox_svg" type="Sprite2D" parent="."]
+position = Vector2(86.25, 505.25)
+scale = Vector2(0.13625, 0.305)
+texture = ExtResource("2_er2qd")
+
+[node name="Left_line" type="Line2D" parent="."]
+points = PackedVector2Array(86, 433, -76, 433)
+
+[node name="Right_line" type="Line2D" parent="."]
+position = Vector2(-4, 29)
+points = PackedVector2Array(86, 433, -76, 433)
+
+[node name="touch_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="touch_area"]
+position = Vector2(16, 427)
+shape = SubResource("CircleShape2D_0f5r5")
+
+[connection signal="input_event" from="touch_area" to="." method="_on_touch_area_input_event"]
