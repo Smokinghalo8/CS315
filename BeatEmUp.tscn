@@ -1,0 +1,211 @@
+[gd_scene load_steps=23 format=3 uid="uid://bfh8hhppsuok"]
+
+[ext_resource type="Script" path="res://beat_em_up_playa.gd" id="1_b1njk"]
+[ext_resource type="Texture2D" uid="uid://kwinjh1f5dfn" path="res://BEATEMUP/Assets/adventurer-v1.5-Sheet.png" id="2_tgoq6"]
+[ext_resource type="Script" path="res://badman.gd" id="3_pofsb"]
+[ext_resource type="Texture2D" uid="uid://cbag5trk8g1u7" path="res://icon.svg" id="3_sg6vj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccvht"]
+
+[sub_resource type="Animation" id="Animation_ba6ck"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BeatEmUpPlaya/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BeatEmUpPlaya/attack_regin:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_d1o1b"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BeatEmUpPlaya/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 49, 50, 51, 52, 53]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BeatEmUpPlaya/attack_regin:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+
+[sub_resource type="Animation" id="Animation_lh5y3"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BeatEmUpPlaya/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_nhs05"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BeatEmUpPlaya/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yi8fh"]
+_data = {
+"RESET": SubResource("Animation_ba6ck"),
+"attack": SubResource("Animation_d1o1b"),
+"idle": SubResource("Animation_lh5y3"),
+"walk": SubResource("Animation_nhs05")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6svow"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4i7bh"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amajs"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pu0po"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3dw5"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mbgnu"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yyidt"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r7nve"]
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yaial"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_byfnh"]
+states/End/position = Vector2(643, 162)
+states/attack/node = SubResource("AnimationNodeAnimation_6svow")
+states/attack/position = Vector2(441, 179)
+states/idle/node = SubResource("AnimationNodeAnimation_4i7bh")
+states/idle/position = Vector2(441, 77)
+states/walk/node = SubResource("AnimationNodeAnimation_amajs")
+states/walk/position = Vector2(608, 77)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_pu0po"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_n3dw5"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_mbgnu"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_yyidt"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_r7nve"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_yaial")]
+graph_offset = Vector2(46, 13)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjh7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_et4bb"]
+size = Vector2(112, 114)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BeatEmUpPlaya" type="CharacterBody2D" parent="."]
+scale = Vector2(4, 4)
+script = ExtResource("1_b1njk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeatEmUpPlaya"]
+shape = SubResource("CapsuleShape2D_ccvht")
+
+[node name="Sprite2D" type="Sprite2D" parent="BeatEmUpPlaya"]
+texture = ExtResource("2_tgoq6")
+hframes = 8
+vframes = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BeatEmUpPlaya"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_yi8fh")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="BeatEmUpPlaya"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_byfnh")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack = false
+parameters/conditions/idle = false
+parameters/conditions/walk = false
+
+[node name="attack_regin" type="Area2D" parent="BeatEmUpPlaya" groups=["enemy"]]
+process_mode = 4
+position = Vector2(15.5, 3.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeatEmUpPlaya/attack_regin"]
+position = Vector2(7.25, 0.25)
+shape = SubResource("CapsuleShape2D_qjh7q")
+
+[node name="badman" type="CharacterBody2D" parent="." groups=["enemy"]]
+position = Vector2(339, 166)
+script = ExtResource("3_pofsb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="badman"]
+position = Vector2(-2, -1)
+shape = SubResource("RectangleShape2D_et4bb")
+
+[node name="Sprite2D" type="Sprite2D" parent="badman"]
+texture = ExtResource("3_sg6vj")
+
+[node name="ProgressBar" type="ProgressBar" parent="badman"]
+offset_left = -62.0
+offset_top = -117.0
+offset_right = -58.0
+offset_bottom = -90.0
+scale = Vector2(32.2088, 2.07686)
+value = 5.0
+show_percentage = false
+
+[connection signal="body_entered" from="BeatEmUpPlaya/attack_regin" to="BeatEmUpPlaya" method="_on_attack_regin_body_entered"]
