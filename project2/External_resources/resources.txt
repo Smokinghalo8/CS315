@@ -1,0 +1,17 @@
+Video Guide Used: https://www.youtube.com/watch?v=UaBFRzkETK8
+Stoped at 2:39:30
+Stopped because inventory_item error
+Will not be adding: spells, dropping items, nor different classes
+
+
+Skipping 2:07:10 - 3:50:00 >--inventory items
+4:04:50 <--go back and update inventory gdscript
+
+I used this Youtube Video to help steer me in the right direction: https://www.youtube.com/watch?v=UaBFRzkETK8
+Sprites I used: https://pixel-boy.itch.io/ninja-adventure-asset-pack
+Game Bonus Sfx - https://pixabay.com/sound-effects/game-bonus-144751/
+achievement sfx - https://pixabay.com/sound-effects/achievement-video-game-type-1-230515/
+Game Music Loop 6 sfx - https://pixabay.com/sound-effects/game-music-loop-6-144641/
+Game Character sfx - https://pixabay.com/sound-effects/game-character-140506/
+
+CREITS ALL GO TO THE PEOPLE WHO MADE THIS WONDERFUL ART

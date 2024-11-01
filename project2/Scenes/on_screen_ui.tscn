@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8ad65qnf26qx"]
+
+[ext_resource type="PackedScene" uid="uid://cvw0djeagvpmj" path="res://Scenes/on_screen_equipment_slot.tscn" id="1_1nocg"]
+[ext_resource type="Script" path="res://Scriptes/on_screen_ui.gd" id="1_cjlhd"]
+
+[node name="onScreenUI" type="CanvasLayer"]
+script = ExtResource("1_cjlhd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1164.0
+offset_bottom = 652.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="right_hand_slot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_1nocg")]
+layout_mode = 2
+slot_name = "Right Hand"

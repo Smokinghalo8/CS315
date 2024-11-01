@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://6uuvl27khdb8"]
+
+[ext_resource type="Script" path="res://pick_up_key.gd" id="1_4wbb5"]
+[ext_resource type="Texture2D" uid="uid://2tr0o7mjbvtp" path="res://Assets/Items/Treasure/GoldKey.png" id="2_e27hq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xcu2"]
+size = Vector2(12, 8)
+
+[node name="PickUpItem" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_4wbb5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.250005, -0.249995)
+scale = Vector2(1.07143, 0.92857)
+texture = ExtResource("2_e27hq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4xcu2")
